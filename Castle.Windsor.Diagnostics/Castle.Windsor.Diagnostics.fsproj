@@ -38,8 +38,12 @@
     <Reference Include="Castle.Windsor">
       <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.PowerPack, Version=1.9.9.9, Culture=neutral, PublicKeyToken=a19089b1c74d0809" />
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core" />
+    <Reference Include="QuickGraph">
+      <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\QuickGraph.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
