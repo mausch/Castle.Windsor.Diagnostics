@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Castle.Windsor.Diagnostics", "Castle.Windsor.Diagnostics\Castle.Windsor.Diagnostics.fsproj", "{7E5EC572-763B-4FD2-9732-C6C8C45D835F}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Castle.Windsor.Diagnostics.Tests", "Castle.Windsor.Diagnostics.Tests\Castle.Windsor.Diagnostics.Tests.fsproj", "{75FDE6EB-ADDC-4F10-B3DF-CE11F26DC555}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{7E5EC572-763B-4FD2-9732-C6C8C45D835F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E5EC572-763B-4FD2-9732-C6C8C45D835F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E5EC572-763B-4FD2-9732-C6C8C45D835F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75FDE6EB-ADDC-4F10-B3DF-CE11F26DC555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75FDE6EB-ADDC-4F10-B3DF-CE11F26DC555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75FDE6EB-ADDC-4F10-B3DF-CE11F26DC555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75FDE6EB-ADDC-4F10-B3DF-CE11F26DC555}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
