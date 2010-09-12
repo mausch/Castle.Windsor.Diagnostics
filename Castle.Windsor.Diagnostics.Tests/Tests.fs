@@ -7,6 +7,8 @@ open Castle.MicroKernel.Handlers
 open Castle.MicroKernel.Registration
 open Castle.Windsor
 open QuickGraph
+open QuickGraph.Algorithms
+open System.Linq
 
 type IComp = interface end
 type CompA(c: IComp) = interface IComp
@@ -42,6 +44,7 @@ let loadGraphFromKernel (k: IKernel) =
                                                   |> Seq.filter (fun m -> m.DependencyType <> DependencyType.Parameter)
                                                   |> Seq.map (fun m -> k.GetHandler(m.DependencyKey).ComponentModel)
                                                   |> Seq.map describe
+                                                  |> Seq.toArray
                                         describe h,dep)
                          |> dict
     dependencyDict.ToVertexAndEdgeListGraph(fun kv -> kv.Value |> Seq.map (fun n -> SEquatableEdge(kv.Key,n)))
@@ -56,4 +59,9 @@ let cycleInQuickgraph() =
               |] |> Array.cast
     c.Register(reg) |> ignore
     let graph = loadGraphFromKernel c.Kernel
+    let dfs = Search.DepthFirstSearchAlgorithm(graph)
+    //dfs.add_DiscoverVertex (fun n -> printfn "%s" n)
+    dfs.add_TreeEdge (fun n -> printfn "%s -> %s" n.Source n.Target)
+    dfs.add_ForwardOrCrossEdge (fun n -> printfn "%s -> %s" n.Source n.Target)
+    dfs.Compute()
     ()    
