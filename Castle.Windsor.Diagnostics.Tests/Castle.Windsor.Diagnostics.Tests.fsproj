@@ -44,13 +44,29 @@
     <Reference Include="MbUnit">
       <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\MbUnit.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.GLEE">
+      <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\Microsoft.GLEE.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.GLEE.Drawing">
+      <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\Microsoft.GLEE.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Glee.GraphViewerGDI">
+      <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\Microsoft.GLEE.GraphViewerGDI.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core" />
     <Reference Include="QuickGraph">
       <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\QuickGraph.dll</HintPath>
     </Reference>
+    <Reference Include="QuickGraph.Data">
+      <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Glee">
+      <HintPath>C:\prg\Castle.Windsor.Diagnostics\lib\QuickGraph.Glee.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>

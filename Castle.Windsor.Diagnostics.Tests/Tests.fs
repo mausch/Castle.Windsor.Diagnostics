@@ -11,23 +11,23 @@ open QuickGraph.Algorithms
 open System.Linq
 
 type IComp = interface end
-type CompA(c: IComp) = interface IComp
-type CompB(c: IComp) = interface IComp
-type CompC(c: IComp) = interface IComp
+type CompA(z: IComp) = interface IComp
+type CompB(z: IComp) = interface IComp
+type CompC(z: IComp) = interface IComp
 
 [<Test>]
 let cycle() =
     use c = new WindsorContainer()
     let reg = [|
-                Component.For<IComp>().ImplementedBy<CompA>().Named("a")
-                Component.For<IComp>().ImplementedBy<CompB>().Named("b")
-                Component.For<IComp>().ImplementedBy<CompC>().Named("c")
+                Component.For<IComp>().ImplementedBy<CompA>().Named("a").ServiceOverrides(dict ["z","b"])
+                Component.For<IComp>().ImplementedBy<CompB>().Named("b").ServiceOverrides(dict ["z","c"])
+                Component.For<IComp>().ImplementedBy<CompC>().Named("c").ServiceOverrides(dict ["z","a"])
               |] |> Array.cast
-    c.Register(reg) |> ignore
+    c.Register reg |> ignore
     assertThrows<HandlerException>(fun() -> c.Resolve<IComp>("a") |> ignore)
 
 let loadGraphFromKernel (k: IKernel) = 
-    let handlers = k.GetAssignableHandlers(typeof<obj>)
+    let handlers = k.GetAssignableHandlers typeof<obj>
     let descType o = o.GetType().AssemblyQualifiedName
     let descLS (t: LifestyleType) = 
         let t = match t with 
@@ -53,15 +53,32 @@ let loadGraphFromKernel (k: IKernel) =
 let cycleInQuickgraph() =
     use c = new WindsorContainer()
     let reg = [|
-                Component.For<IComp>().ImplementedBy<CompA>().Named("a")
-                Component.For<IComp>().ImplementedBy<CompB>().Named("b")
-                Component.For<IComp>().ImplementedBy<CompC>().Named("c")
+                Component.For<IComp>().ImplementedBy<CompA>().Named("a").ServiceOverrides(dict ["z","b"])
+                Component.For<IComp>().ImplementedBy<CompB>().Named("b").ServiceOverrides(dict ["z","c"])
+                Component.For<IComp>().ImplementedBy<CompC>().Named("c").ServiceOverrides(dict ["z","a"])
               |] |> Array.cast
-    c.Register(reg) |> ignore
+    c.Register reg |> ignore
     let graph = loadGraphFromKernel c.Kernel
-    let dfs = Search.DepthFirstSearchAlgorithm(graph)
+    let dfs = Search.DepthFirstSearchAlgorithm graph
     //dfs.add_DiscoverVertex (fun n -> printfn "%s" n)
     dfs.add_TreeEdge (fun n -> printfn "%s -> %s" n.Source n.Target)
     dfs.add_ForwardOrCrossEdge (fun n -> printfn "%s -> %s" n.Source n.Target)
     dfs.Compute()
     ()    
+
+[<Test>]
+let paintGraph() = 
+    use c = new WindsorContainer()
+    let reg = [|
+
+                Component.For<IComp>().ImplementedBy<CompA>().Named("a").ServiceOverrides(dict ["z","b"])
+                Component.For<IComp>().ImplementedBy<CompB>().Named("b").ServiceOverrides(dict ["z","c"])
+                Component.For<IComp>().ImplementedBy<CompC>().Named("c").ServiceOverrides(dict ["z","a"])
+              |] |> Array.cast
+    c.Register reg |> ignore
+    let graph = loadGraphFromKernel c.Kernel
+    let bmp = graph |> toGleeGraph |> toBitmap
+    bmp.Save @"c:\graph.png"
+    ()
+
+    
