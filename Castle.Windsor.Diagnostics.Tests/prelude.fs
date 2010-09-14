@@ -14,6 +14,9 @@ open System.Drawing.Text
 module Array = 
     let cast a = Array.map unbox a
 
+module Set =
+    let addMany m = (Seq.append m) >> Set.ofSeq
+
 let assertThrows<'e when 'e :> exn> f =
     let action = Gallio.Common.Action f
     MbUnit.Framework.Assert.Throws<'e> action |> ignore

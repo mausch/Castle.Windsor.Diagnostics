@@ -7,8 +7,6 @@ let loadKernel (xmlFile: string) =
     let container = new WindsorContainer(xmlFile)
     container.Kernel
 
-
-
 [<EntryPoint>]
 let main args = 
     let compile s = printfn "Compiling %s..." s
