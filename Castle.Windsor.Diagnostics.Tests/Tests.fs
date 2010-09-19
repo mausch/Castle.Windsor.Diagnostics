@@ -127,12 +127,10 @@ let ``find lifestyle issues`` () =
         | LifestyleType.Undefined -> LifestyleType.Singleton 
         | x -> x
     let graph = loadGraphFromKernel c.Kernel
-    let dfs = Search.DepthFirstSearchAlgorithm graph
     let visitEdge (n: Node SEquatableEdge) = 
         let l1 = getLS n.Source.node
         let l2 = getLS n.Target.node
         if l1 = LifestyleType.Singleton && l2 = LifestyleType.Transient
             then failwithf "Component '%s' is a singleton depending on component '%s' which is a transient" n.Source.node.Name n.Target.node.Name
-    dfs.add_ExamineEdge (EdgeAction(visitEdge))
-    dfs.Compute()
+    graph.Edges |> Seq.iter visitEdge
     ()
